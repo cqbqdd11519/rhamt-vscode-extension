@@ -153,23 +153,8 @@
         ],
         "menus": {
             "view/title": [
-                {
-                    "command": "rhamt.newConfiguration",
-                    "when": "view == rhamtExplorerView && rhamtReady",
-                    "group": "navigation"
-                }
             ],
             "view/item/context": [
-                {
-                    "command": "rhamt.runConfiguration",
-                    "when": "view == rhamtExplorerView && viewItem == rhamtConfiguration",
-                    "group": "rhamt"
-                },
-                {
-                    "command": "rhamt.deleteConfiguration",
-                    "when": "view == rhamtExplorerView && viewItem == rhamtConfiguration",
-                    "group": "rhamt"
-                },
                 {
                     "command": "rhamt.openConfiguration",
                     "when": "view == rhamtExplorerView && viewItem == rhamtConfiguration",
@@ -209,26 +194,6 @@
                     "command": "rhamt.markIssueAsComplete",
                     "when": "view == rhamtExplorerView && viewItem =~ /issue/i",
                     "group": "rhamt@3"
-                },
-                {
-                    "command": "rhamt.deleteResults",
-                    "when": "view == rhamtExplorerView && viewItem == results",
-                    "group": "rhamt"
-                },
-                {
-                    "command": "rhamt.applyQuickfix",
-                    "when": "view == rhamtExplorerView && viewItem == quickfix",
-                    "group": "rhamt"
-                },
-                {
-                    "command": "rhamt.previewQuickfix",
-                    "when": "view == rhamtExplorerView && viewItem == quickfix",
-                    "group": "rhamt"
-                },
-                {
-                    "command": "rhamt.applyQuickfixes",
-                    "when": "view == rhamtExplorerView && viewItem =~ /quickfix-container/i",
-                    "group": "rhamt@5"
                 }
             ]
         }

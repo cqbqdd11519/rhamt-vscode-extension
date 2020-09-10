@@ -66,6 +66,9 @@ async function computeCheHostInfo(): Promise<RhamtHostInfo> {
 
 export async function getEndpoints(ctx: vscode.ExtensionContext, out: string): Promise<any> {
     const findConfigurationLocation = async () => {
+        if (process.env.CONFIG_URL) {
+            return `http://${process.env.CONFIG_URL}/`
+        }
         if (!process.env.CHE_WORKSPACE_NAMESPACE) {
             return `http://localhost:${CONFIG_PORT}/`;
         }
@@ -73,6 +76,9 @@ export async function getEndpoints(ctx: vscode.ExtensionContext, out: string): P
         return info.configurationUrl;
     };
     const reportLocation = async () => {
+        if (process.env.REPORT_URL) {
+            return `http://${process.env.REPORT_URL}/`
+        }
         if (!process.env.CHE_WORKSPACE_NAMESPACE) {
             return `http://localhost:${REPORT_PORT}/`;
         }

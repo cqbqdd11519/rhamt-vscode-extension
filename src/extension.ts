@@ -18,7 +18,6 @@ import { HintItem } from './tree/hintItem';
 import { HintNode } from './tree/hintNode';
 import { NewRulesetWizard } from './wizard/newRulesetWizard';
 import * as endpoints from './server/endpoints';
-import { ReportServer } from './report/reportServer';
 import { ConfigurationEditorSerializer } from './editor/configurationEditorSerializer';
 import { QuickfixContentProvider } from './quickfix/contentProvider';
 import { QuickfixedResourceProvider } from './quickfix/quickfixedResourceProvider';
@@ -27,7 +26,6 @@ let detailsView: IssueDetailsView;
 let modelService: ModelService;
 let stateLocation: string;
 let configEditorServer: ConfigurationEditorServer;
-let reportServer: ReportServer;
 
 export async function activate(context: vscode.ExtensionContext) {
     stateLocation = path.join(context.globalStoragePath, '.mta', 'tooling');
@@ -42,13 +40,7 @@ export async function activate(context: vscode.ExtensionContext) {
     const connectionService = new ClientConnectionService(modelService);
     configEditorServer = new ConfigurationEditorServer(locations, configServerController, connectionService);
     configEditorServer.start().catch(e => console.log(`Error while starting coniguration editor server: ${e}`));
-    reportServer = new ReportServer(locations);
-    try {
-        await modelService.readCliMeta();
-        reportServer.start();    
-    } catch (e) {
-        console.log(`Error while starting report server: ${e}`);
-    }
+    await modelService.readCliMeta();
 
     new RhamtView(context, modelService, configEditorService, locations);
     new ReportView(context, locations);
@@ -104,5 +96,4 @@ export async function activate(context: vscode.ExtensionContext) {
 
 export function deactivate() {
     configEditorServer.dispose();
-    reportServer.dispose();
 }
